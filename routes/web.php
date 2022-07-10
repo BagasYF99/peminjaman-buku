@@ -14,14 +14,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route::get('/index', 'MainController@index')->middleware('auth');
-//report_
+// admin_crud
 
+Route::delete('/buku/delete/{id}', 'BookController@destroy')->middleware('auth');
+Route::post('/buku/edit/{id}', 'BookController@update')->middleware('auth');
+Route::post('/buku/store', 'BookController@store')->middleware('auth');
+Route::get('/book', 'BookController@index')->middleware('auth');
+// admin_crud_end
+//report_
 Route::get('/user/peminjam', 'MainController@daftarPeminjam')->middleware('auth');
-Route::get('/buku/semua', 'BookController@index')->middleware('auth');
+Route::get('/buku/semua', 'MainController@indexSemuaBuku')->middleware('auth');
 //report_end
+
 // pengembalian_
 Route::post('/pengembalian/buku/update/{id}', 'PengembalianController@update')->middleware('auth');
 // pengembalian_end
+
 Route::post('/pinjam/buku/{id}', 'MainController@bookOut')->middleware('auth');
 Route::get('/terpinjam', 'PengembalianController@index')->middleware('auth');
 Route::get('/index', 'MainController@index');

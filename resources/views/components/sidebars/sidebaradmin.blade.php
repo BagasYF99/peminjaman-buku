@@ -32,9 +32,17 @@
                 </li>
             </ul>
         </li>
-        <!-- <li class="{{ ($title === 'dipinjam') ? 'active' : ''}}">
-            <a href="/dipinjam">dipinjam</a>
-        </li> -->
+        <li class="{{ ($title === 'crud') ? 'active' : ''}}">
+            <a href="#crudSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">CRUD</a>
+            <ul class="collapse list-unstyled" id="crudSubmenu">
+                <li>
+                    <a href="/book">Buku</a>
+                </li>
+                <li>
+                    <a href="/user">User/Admin</a>
+                </li>
+            </ul>
+        </li>
         <li>
             <a href="/logout">Logout</a>
         </li>

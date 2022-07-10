@@ -32,6 +32,15 @@ class MainController extends Controller
         return view('indexpeminjaman', ['books'=>$books, 'users'=>$users, 'title'=>'peminjamanBuku']);
     }
 
+    public function indexSemuaBuku()
+    {
+        $books = Book::where('id', '>', 0)->get();
+        if(count($books)<1){
+            $books = [];
+        }
+        return view('/indexsemuabuku', ['title'=>'report','books'=>$books]);
+    }
+
     public function daftarPeminjam()
     {
         $peminjams = DB::table('books_outs')
@@ -43,7 +52,7 @@ class MainController extends Controller
                         // ->where('books.status', '=', 'terpinjam')
                         ->get();
         // dd($peminjams);
-        // $denda = 
+        $dendas = [];
         foreach($peminjams as $peminjam){
             if($peminjam->date_in != null){
                 $dateIn = Carbon::parse($peminjam->date_in);

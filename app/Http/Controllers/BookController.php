@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Book;
 use Illuminate\Http\Request;
+use App\Models\Book;
+use App\Models\Books_out;
+use App\Models\User;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
@@ -18,7 +24,7 @@ class BookController extends Controller
         if(count($books)<1){
             $books = [];
         }
-        return view('/indexsemuabuku', ['title'=>'report','books'=>$books]);
+        return view('/adminbuku', ['title'=>'CRUD','books'=>$books]);
     }
 
     /**
@@ -39,7 +45,23 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|max:45',
+            'author' => 'required|max:45',
+            'isbn' => 'required|max:45',
+            'publised' => 'required|numeric|digits:8',
+            'status' => 'required',
+        ]);
+        // dd();
+        // $validated['publised'] = Carbon::create($validated['publised'])->format('d-m-Y');
+        // $validated['publised'] = STR::replace('-','',$validated['publised']);
+        // dd($validated);
+        $addBuku = Book::create($validated);
+        if(!$addBuku){
+            return redirect('/book')->with('error', 'Gagal menambah buku baru!');
+        }
+        return redirect('/book')->with('success', 'Berhasil menambah buku baru!');
+        // dd($request->all());
     }
 
     /**
@@ -71,9 +93,20 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request, $id)
     {
-        //
+        $book = Book::find($id);
+        $validated = $request->validate([
+            'title' => 'required|max:45',
+            'author' => 'required|max:45',
+            'isbn' => 'required|max:45',
+            'publised' => 'required|numeric|digits:8',
+            'status' => 'required',
+        ]);
+        // dd($validated);
+        $book->update($validated);
+        return redirect('/book')->with('success', 'Berhasil mengedit buku!');
+        // dd($request->all());
     }
 
     /**
@@ -82,9 +115,32 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book)
+    public function destroy($id)
     {
-        //
+        // dd($id);
+        $book = Book::find($id);
+        if($book){
+            // dd($book);
+            $dipinjam = DB::table('books_outs')
+                        ->join('users', 'books_outs.user_id', '=', 'users.id')
+                        ->join('books', 'books_outs.book_id', '=', 'books.id')
+                        ->select('users.username', 'books.*', 'books_outs.*')
+                        // ->where('user_id', '!=', null)
+                        ->where('book_id', '=', $id)
+                        // ->where('books_outs.id', '=', $id)
+                        ->where('books.status', '=', 'terpinjam')
+                        ->first();
+            // dd($dipinjam->status);
+            if($dipinjam){
+                if($dipinjam->status == "terpinjam"){
+                    return redirect('/book')->with('error', 'Gagal menghapus data buku, karena buku masih di pinjam!');
+                }else{
+                    $dipinjam->delete();
+                }
+            }
+            $book->delete();
+        }
+        return redirect('/book')->with('success', 'Berhasil menghapus data buku!');
     }
 
     
