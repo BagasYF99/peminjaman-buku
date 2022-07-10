@@ -28,6 +28,17 @@
             </div> -->
         </div>
     </nav>
+    <!-- alert_ -->
+    @if(session()->has('success'))
+    <div class="alert alert-success">
+        {{session()->get('success')}}
+    </div>
+    @elseif(session()->has('error'))
+    <div class="alert alert-danger">
+        {{session()->get('error')}}
+    </div>
+    @endif
+    <!-- alert_end -->
     <table class="table table-dark table-borderless">
         <thead>
             <tr>
@@ -36,7 +47,7 @@
                 <td>Author</td>
                 <td>Isbn</td>
                 <td>Publised</td>
-                <!-- <td>Status</td> -->
+                <td>Status</td>
                 <td>Action</td>
             </tr>
         </thead>
@@ -50,23 +61,27 @@
                 <td>{{$book->author}}</td>
                 <td>{{$book->isbn}}</td>
                 <td>{{$book->publised}}</td>
-                <!-- <td>{{$book->status}}</td>
+                <td>{{$book->status}}</td>
                 <td>
                     @if($book->status == "terpinjam")
                     <button class="btn btn-primary">
-                       Pengembalian Buku
+                        <a href="/terpinjam">
+                            Pengembalian Buku
+                        </a>
                     </button>
                     @else
                     <button class="btn btn-primary">
-                       Pinjam Buku
+                        <a href="/index">
+                            Pinjam Buku
+                        </a>
                     </button>
                     @endif
-                </td> -->
-                <td>
+                </td>
+                <!-- <td>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pinjamBuku-{{$book->id}}">
                     Pinjam Buku
                     </button>
-                </td>
+                </td> -->
             </tr>
             @endforeach
         </tbody>

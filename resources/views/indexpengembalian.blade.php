@@ -29,50 +29,67 @@
   </head>
   <body>
 
-<!-- Modal Pinjam Buku-->
-@foreach($books as $book)
-    <div class="modal fade" id="pinjamBuku-{{$book->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal pengembalian Buku-->
+@foreach($peminjams as $peminjam)
+    <div class="modal fade" id="pengembalianBuku-{{$peminjam->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Pinjam Buku</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Pengembalian Buku</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="modal-body">
-            <form method="post" action="/pinjam/buku">
+            <form method="post" action="/pengembalian/buku/update/{{$peminjam->id}}">
                 @csrf
             <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Judul Buku:</label>
-                <input type="text" class="form-control" required value="{{$book->title}}" id="recipient-name">
+                <input type="text" class="form-control" name="title" readonly required value="{{$peminjam->title}}" id="recipient-name">
+                @error('title')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="Pengarang-text" class="col-form-label">Pengarang:</label>
-                <input type="text" class="form-control" required value="{{$book->author}}" id="Pengarang-text">
+                <input type="text" class="form-control" name="author" readonly required value="{{$peminjam->author}}" id="Pengarang-text">
+                @error('author')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="Isbn-text" class="col-form-label">Isbn:</label>
-                <input type="text" class="form-control" required value="{{$book->isbn}}" id="Isbn-text">
+                <input type="text" class="form-control" name="isbn" readonly required value="{{$peminjam->isbn}}" id="Isbn-text">
+                @error('isbn')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="Nama peminjam-text" class="col-form-label">Nama peminjam:</label>
-                <select class="custom-select" required>
-                    @foreach($users as $user)
-                    <option value="{{$user->id}}">{{$user->username}}</option>
-                    @endforeach
-                </select>
+                <!-- <select class="custom-select" name="user_id" readonly required>
+                    <option value="{{$peminjam->user_id}}">{{$peminjam->username}}</option>
+                </select> -->
+                <input type="text" class="form-control" id="username-text" name="username" readonly required value="{{$peminjam->username}}">
+                @error('username')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="Tanggal pinjam-text" class="col-form-label">Tanggal pinjam:</label>
-                <input type="date" class="form-control" id="Tanggal pinjam-text" required>
+                <input type="date" class="form-control" id="Tanggal pinjam-text" name="date_out" readonly required value="{{$peminjam->date_out}}">
+                @error('date_out')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-group">
-                <label for="Tanggal kembali aktual-text" class="col-form-label">Tanggal kembali aktual:</label>
-                <input type="date" class="form-control" id="Tanggal kembali aktual-text" required>
+                <label for="Tanggal kembali aktual-text" class="col-form-label">Tanggal kembali:</label>
+                <input type="date" class="form-control" id="Tanggal kembali aktual-text" name="date_in" required value="{{$peminjam->date_in}}">
+                @error('date_in')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="text-right">
-                <button type="submit" class="btn btn-primary">Pinjam Buku</button>
+                <button type="submit" class="btn btn-primary">Kembalikan Buku</button>
             </div>
             </form>
         </div>
@@ -80,7 +97,7 @@
     </div>
     </div>
     @endforeach
-<!-- Modal Pinjam Buku End-->
+<!-- Modal pengembalian Buku End-->
 
     <div class="wrapper">
         @auth
@@ -92,14 +109,15 @@
                 @include('components.sidebars.sidebaradmin', ['title'=>$title])
                 
                 <!-- Page Content  -->
-                @include('components.contents.admin.allbook', ['books'=>$books])
+                @include('components.contents.admin.pengembalianbuku', ['peminjams'=>$peminjams])
+                
             @endif
         @else
             <!-- Sidebar  -->
             @include('components.sidebars.sidebarguest', ['title'=>$title])
             
             <!-- Page Content  -->
-            @include('components.contents.contentguest', ['books'=>$books])
+            @include('components.contents.contentguest', ['peminjams'=>$peminjams])
             
         @endauth
             

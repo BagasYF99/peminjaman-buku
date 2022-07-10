@@ -18,7 +18,7 @@ class CreateBooksOutsTable extends Migration
             $table->bigInteger('book_id');
             $table->bigInteger('user_id');
             $table->date('date_out');
-            $table->date('date_in');
+            $table->date('date_in')->nullable();
             $table->date('date_in_actual');
             $table->timestamps();
         });

@@ -7,12 +7,34 @@
 
     <ul class="list-unstyled components">
         <p>Peminjaman Buku</p>
-        <li class="{{ ($title === 'dashboard') ? 'active' : ''}}">
+        <!-- <li class="{{ ($title === 'dashboard') ? 'active' : ''}}">
             <a href="/dashboard">Dashboard</a>
+        </li> -->
+        <li class="{{ ($title === 'peminjamanBuku') ? 'active' : ''}}">
+            <a href="#bookSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Buku</a>
+            <ul class="collapse list-unstyled" id="bookSubmenu">
+                <li>
+                    <a href="/index">Peminjaman Buku</a>
+                </li>
+                <li>
+                    <a href="/terpinjam">Pengembalian Buku</a>
+                </li>
+            </ul>
         </li>
-        <li class="{{ ($title === 'dipinjam') ? 'active' : ''}}">
+        <li class="{{ ($title === 'report') ? 'active' : ''}}">
+            <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Report</a>
+            <ul class="collapse list-unstyled" id="reportSubmenu">
+                <li>
+                    <a href="/user/peminjam">Daftar Peminjam Buku</a>
+                </li>
+                <li>
+                    <a href="/buku/semua">Semua Buku</a>
+                </li>
+            </ul>
+        </li>
+        <!-- <li class="{{ ($title === 'dipinjam') ? 'active' : ''}}">
             <a href="/dipinjam">dipinjam</a>
-        </li>
+        </li> -->
         <li>
             <a href="/logout">Logout</a>
         </li>

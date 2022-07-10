@@ -18,7 +18,7 @@ class BookController extends Controller
         if(count($books)<1){
             $books = [];
         }
-        return view('/index', compact('books'));
+        return view('/indexsemuabuku', ['title'=>'report','books'=>$books]);
     }
 
     /**
@@ -86,4 +86,6 @@ class BookController extends Controller
     {
         //
     }
+
+    
 }

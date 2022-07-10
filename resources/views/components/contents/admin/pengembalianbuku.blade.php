@@ -47,23 +47,29 @@
                 <td>Author</td>
                 <td>Isbn</td>
                 <td>Publised</td>
+                <td>Nama Peminjam</td>
+                <td>Tanggal Pinjam</td>
+                <td>Tanggal Kembali Aktual</td>
                 <!-- <td>Status</td> -->
                 <td>Action</td>
             </tr>
         </thead>
         <tbody>
             <?php $no = 0 ?>
-            @foreach($books as $book)
+            @foreach($peminjams as $peminjam)
             <?php $no++ ?>
             <tr>
                 <td>{{$no}}</td>
-                <td>{{$book->title}}</td>
-                <td>{{$book->author}}</td>
-                <td>{{$book->isbn}}</td>
-                <td>{{$book->publised}}</td>
-                <!-- <td>{{$book->status}}</td>
+                <td>{{$peminjam->title}}</td>
+                <td>{{$peminjam->author}}</td>
+                <td>{{$peminjam->isbn}}</td>
+                <td>{{$peminjam->publised}}</td>
+                <td>{{$peminjam->username}}</td>
+                <td>{{$peminjam->date_out}}</td>
+                <td>{{$peminjam->date_in_actual}}</td>
+                <!-- <td>{{$peminjam->status}}</td>
                 <td>
-                    @if($book->status == "terpinjam")
+                    @if($peminjam->status == "terpinjam")
                     <button class="btn btn-primary">
                        Pengembalian Buku
                     </button>
@@ -74,8 +80,8 @@
                     @endif
                 </td> -->
                 <td>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pinjamBuku-{{$book->id}}">
-                    Pinjam Buku
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pengembalianBuku-{{$peminjam->id}}">
+                    Kembalikan Buku
                     </button>
                 </td>
             </tr>

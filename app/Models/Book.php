@@ -15,4 +15,13 @@ class Book extends Model
         'publised',
         'status',
     ];
+    public function books_outs()
+    {
+        return $this->hasMany(Books_out::class);
+    }
+
+    // public function books_outs()
+    // {
+    //     return $this->belongsTo(Books_out::class);
+    // }
 }

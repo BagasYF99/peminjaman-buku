@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Book_out extends Model
+class Books_out extends Model
 {
     use HasFactory;
     protected $fillable = [
@@ -18,10 +18,20 @@ class Book_out extends Model
 
     public function books()
     {
-        return $this->hasMany(Book::class);
+        return $this->belongsTo(Book::class);
     }
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
     }
+
+    
+    // public function books()
+    // {
+    //     return $this->hasMany(Book::class);
+    // }
+    // public function users()
+    // {
+    //     return $this->hasMany(User::class);
+    // }
 }

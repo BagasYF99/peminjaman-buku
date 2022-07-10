@@ -20,7 +20,7 @@ class BookFactory extends Factory
         'author' => $this->faker->name(),
         'isbn' => STR::random(9),
         'publised' => $this->faker->dateTimeBetween('1950-01-01', 'now')->format('Ymd'),
-        'status' => $this->faker->randomElement(['terpinjam', 'tidak terpinjam']),
+        'status' => $this->faker->randomElement(['tidak terpinjam']),
         ];
     }
 }
