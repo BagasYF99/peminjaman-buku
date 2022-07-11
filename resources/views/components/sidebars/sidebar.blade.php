@@ -1,5 +1,5 @@
 
-<!-- Sidebar  -->
+<!-- Sidebar user -->
 <nav id="sidebar">
     <div class="sidebar-header">
         <h3>Hallo, {{Auth::user()->username}}</h3>
@@ -7,23 +7,20 @@
 
     <ul class="list-unstyled components">
         <p>Peminjaman Buku</p>
-        <!-- <li class="active">
-            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-            <ul class="collapse list-unstyled" id="homeSubmenu">
+        <li class="{{ ($title === 'peminjamanBuku') ? 'active' : ''}}">
+            <a href="#userBookSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Buku</a>
+            <ul class="collapse list-unstyled" id="userBookSubmenu">
                 <li>
-                    <a href="#">Home 1</a>
+                    <a href="/index">Semua Buku</a>
                 </li>
                 <li>
-                    <a href="#">Home 2</a>
-                </li>
-                <li>
-                    <a href="#">Home 3</a>
+                    <a href="/terpinjam">Buku Dipinjam</a>
                 </li>
             </ul>
-        </li> -->
-        <li class="Active">
-            <a href="/dashboard">Dashboard</a>
         </li>
+        <!-- <li class="Active">
+            <a href="/dashboard">Dashboard</a>
+        </li> -->
         <!-- <li>
             <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
             <ul class="collapse list-unstyled" id="pageSubmenu">

@@ -52,6 +52,7 @@
             </tr>
         </thead>
         <tbody>
+        @if(count($books)>0)
             <?php $no = 0 ?>
             @foreach($books as $book)
             <?php $no++ ?>
@@ -80,6 +81,11 @@
                 </td>
             </tr>
             @endforeach
+            @else
+            <div>
+                <h2>Tidak Ada Buku Yang Terdaftar!</h2>
+            </div>
+            @endif
         </tbody>
     </table>
 

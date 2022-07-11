@@ -100,10 +100,12 @@
     <div class="wrapper">
         @auth
             @if(Auth::user()->role != 'admin')
-                <!-- Sidebar  -->
-                @include('components.sidebars.sidebar')
+                <!-- Sidebar user -->
+                @include('components.sidebars.sidebar', ['title'=>$title])
+                <!-- Page Content  -->
+                @include('components.contents.user.semuabuku', ['books'=>$books])
             @else
-                <!-- Sidebar  -->
+                <!-- Sidebar admin -->
                 @include('components.sidebars.sidebaradmin', ['title'=>$title])
                 
                 <!-- Page Content  -->

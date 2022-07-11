@@ -1,5 +1,5 @@
 
-<!-- Sidebar  -->
+<!-- Sidebar Admin -->
 <nav id="sidebar">
     <div class="sidebar-header">
         <h3>Hallo, Admin {{Auth::user()->username}}</h3>

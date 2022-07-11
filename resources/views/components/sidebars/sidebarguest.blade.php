@@ -1,5 +1,5 @@
 
-<!-- Sidebar  -->
+<!-- Sidebar guest -->
 <nav id="sidebar">
     <div class="sidebar-header">
         <h3>Guest</h3>

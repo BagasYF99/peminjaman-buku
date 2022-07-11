@@ -55,6 +55,7 @@
             </tr>
         </thead>
         <tbody>
+        @if(count($peminjams)>0)
             <?php $no = 0 ?>
             @foreach($peminjams as $peminjam)
             <?php $no++ ?>
@@ -86,6 +87,11 @@
                 </td>
             </tr>
             @endforeach
+            @else
+            <div>
+                <h2>Tidak Ada Buku Yang Sedang di Pinjam!</h2>
+            </div>
+            @endif
         </tbody>
     </table>
 

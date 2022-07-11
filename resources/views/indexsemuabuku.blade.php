@@ -32,18 +32,20 @@
     <div class="wrapper">
         @auth
             @if(Auth::user()->role != 'admin')
-                <!-- Sidebar  -->
-                @include('components.sidebars.sidebar')
+                <!-- Sidebar user -->
+                @include('components.sidebars.sidebar', ['title'=>$title])
+                <!-- Page Content user -->
+                @include('components.contents.user', ['books'=>$books])
             @else
-                <!-- Sidebar  -->
+                <!-- Sidebar admin -->
                 @include('components.sidebars.sidebaradmin', ['title'=>$title])
                 
-                <!-- Page Content  -->
+                <!-- Page Content admin -->
                 @include('components.contents.admin.semuabuku', ['books'=>$books])
                 
             @endif
         @else
-            <!-- Sidebar  -->
+            <!-- Sidebar guest -->
             @include('components.sidebars.sidebarguest', ['title'=>$title])
             
             <!-- Page Content  -->

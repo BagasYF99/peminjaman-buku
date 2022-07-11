@@ -19,6 +19,24 @@ class PengembalianController extends Controller
      */
     public function index()
     {
+        $user = Auth()->user()->role;
+        if($user){
+            $userId = Auth()->user()->id;
+            // dd($userId);
+            $peminjams = DB::table('books_outs')
+                            ->join('users', 'books_outs.user_id', '=', 'users.id')
+                            ->join('books', 'books_outs.book_id', '=', 'books.id')
+                            ->select('users.username', 'books.*', 'books_outs.*')
+                            ->where('user_id', '=', $userId)
+                            ->where('book_id', '!=', null)
+                            ->where('books.status', '=', 'terpinjam')
+                            ->get();
+            if(count($peminjams)<0){
+                $peminjams = [];
+            }
+            return view('/indexpengembalian', ['title'=>'pengembalianBuku', 'peminjams'=>$peminjams]);
+        }
+        
         $peminjams = DB::table('books_outs')
                         ->join('users', 'books_outs.user_id', '=', 'users.id')
                         ->join('books', 'books_outs.book_id', '=', 'books.id')

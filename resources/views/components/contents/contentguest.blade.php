@@ -37,10 +37,12 @@
                 <td>Author</td>
                 <td>Isbn</td>
                 <td>Publised</td>
-                <!-- <td>Status</td> -->
+                <td>Status</td>
             </tr>
         </thead>
         <tbody>
+        @if(count($books)>0)
+            
             <?php $no = 0 ?>
             @foreach($books as $book)
             <?php $no++ ?>
@@ -50,8 +52,8 @@
                 <td>{{$book->author}}</td>
                 <td>{{$book->isbn}}</td>
                 <td>{{$book->publised}}</td>
-                <!-- <td>{{$book->status}}</td>
-                <td>
+                <td>{{$book->status}}</td>
+                <!-- <td>
                     @if($book->status == "terpinjam")
                     <button class="btn btn-primary">
                        Pengembalian Buku
@@ -64,5 +66,10 @@
                 </td> -->
             </tr>
             @endforeach
+            @else
+            <div>
+                <h2>Tidak Ada Buku Yang Terdaftar!</h2>
+            </div>
+            @endif
         </tbody>
     </table>

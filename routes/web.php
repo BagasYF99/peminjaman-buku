@@ -14,8 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route::get('/index', 'MainController@index')->middleware('auth');
-// admin_crud
+// Route::get('/dipinjam', 'UserController@dipinjam')->middleware('auth');
 
+// admin_crud
 Route::delete('/buku/delete/{id}', 'BookController@destroy')->middleware('auth');
 Route::post('/buku/edit/{id}', 'BookController@update')->middleware('auth');
 Route::post('/buku/store', 'BookController@store')->middleware('auth');

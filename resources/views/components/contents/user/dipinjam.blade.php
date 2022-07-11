@@ -47,66 +47,49 @@
                 <td>Author</td>
                 <td>Isbn</td>
                 <td>Publised</td>
-                <td>Tanggal pinjam</td>
-                <td>Tanggal kembali</td>
-                <td>Tanggal kembali aktual</td>
-                <td>Status</td>
-                <td>Denda</td>
-                <td>Nama peminjam</td>
-                <td>Action</td>
+                <td>Nama Peminjam</td>
+                <td>Tanggal Pinjam</td>
+                <td>Tanggal Kembali Aktual</td>
+                <!-- <td>Status</td> -->
+                <!-- <td>Action</td> -->
             </tr>
         </thead>
         <tbody>
-        @if(count($peminjams)>0)
+            @if(count($peminjams)>0)
             <?php $no = 0 ?>
             @foreach($peminjams as $peminjam)
-                @foreach($dendas as $denda)
             <?php $no++ ?>
-                @if($peminjam->id == $denda['id'])
             <tr>
                 <td>{{$no}}</td>
                 <td>{{$peminjam->title}}</td>
                 <td>{{$peminjam->author}}</td>
                 <td>{{$peminjam->isbn}}</td>
                 <td>{{$peminjam->publised}}</td>
-                <td>{{$peminjam->date_out}}</td>
-                <td>{{$peminjam->date_in}}</td>
-                <td>{{$peminjam->date_in_actual}}</td>
-                @if($peminjam->date_in != null)
-                    <td>Sudah balik</td>
-                @else
-                    <td>Masih pinjam</td>
-                @endif
-                <td>{{$denda['denda']}}</td>
                 <td>{{$peminjam->username}}</td>
+                <td>{{$peminjam->date_out}}</td>
+                <td>{{$peminjam->date_in_actual}}</td>
+                <!-- <td>{{$peminjam->status}}</td>
                 <td>
                     @if($peminjam->status == "terpinjam")
                     <button class="btn btn-primary">
-                        <a href="/terpinjam">
-                            Pengembalian Buku
-                        </a>
+                       Pengembalian Buku
                     </button>
                     @else
                     <button class="btn btn-primary">
-                        <a href="/index">
-                            Pinjam Buku
-                        </a>
+                       Pinjam Buku
                     </button>
                     @endif
-                </td>
+                </td> -->
                 <!-- <td>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pinjamBuku-{{$peminjam->id}}">
-                    Pinjam Buku
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pengembalianBuku-{{$peminjam->id}}">
+                    Kembalikan Buku
                     </button>
                 </td> -->
             </tr>
-                    @else
-                    @endif
-                @endforeach
             @endforeach
             @else
             <div>
-                <h2>Tidak Ada Buku Yang Sedang di Pinjam!</h2>
+                <h2>Tidak Ada Buku Yang Anda Pinjam!</h2>
             </div>
             @endif
         </tbody>

@@ -51,7 +51,8 @@
                         @enderror
                     </div>
                     <button class="btn btn-outline-light btn-lg px-5" di="login" type="submit">Login</button>
-
+                    <br>
+                    <p class="mt-3">Go to dashboard as a <a href="/index">Guest</a></p>
                     </div>
                 </div>
                 </div>

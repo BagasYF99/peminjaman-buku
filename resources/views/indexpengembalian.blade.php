@@ -103,7 +103,10 @@
         @auth
             @if(Auth::user()->role != 'admin')
                 <!-- Sidebar  -->
-                @include('components.sidebars.sidebar')
+                @include('components.sidebars.sidebar', ['title'=>$title])
+                
+                <!-- Page Content  -->
+                @include('components.contents.user.dipinjam', ['peminjams'=>$peminjams])
             @else
                 <!-- Sidebar  -->
                 @include('components.sidebars.sidebaradmin', ['title'=>$title])
